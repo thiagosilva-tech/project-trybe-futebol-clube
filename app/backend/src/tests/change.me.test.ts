@@ -39,7 +39,25 @@ describe('Seu teste', () => {
   //   expect(...)
   // });
 
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
-  });
+  describe('GET /teams', () => { 
+    before(function () {sinon.restore()})
+    it('Retorna status 200 e um array de teams', async function () {
+        const httpResponse = (await chai.request(app).get('/teams'));
+
+        expect(httpResponse.status).to.be.equal(200);
+        expect(httpResponse.body).to.be.an('array');
+    } 
+    )
+ })
+
+ describe('GET /teams/:id', () => {
+    before(function () {sinon.restore()})
+    it('Retorna status 200 e um objeto team', async function () {
+        const httpResponse = (await chai.request(app).get('/teams/1'));
+
+        expect(httpResponse.status).to.be.equal(200);
+        expect(httpResponse.body).to.be.an('object');
+    }
+    )
+ });
 });
