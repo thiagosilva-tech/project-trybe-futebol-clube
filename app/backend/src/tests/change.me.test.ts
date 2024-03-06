@@ -1,55 +1,45 @@
-import * as sinon from "sinon";
-import * as chai from "chai";
-// @ts-ignore
-import chaiHttp = require("chai-http");
+// import * as sinon from 'sinon';
+// import * as chai from 'chai';
+// // @ts-ignore
+// import chaiHttp = require('chai-http');
 
-import { app } from "../app";
+// import { app } from '../app';
+// import Example from '../database/models/ExampleModel';
 
-chai.use(chaiHttp);
+// import { Response } from 'superagent';
 
-const { expect } = chai;
+// chai.use(chaiHttp);
 
-describe("Seu teste", () => {
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
+// const { expect } = chai;
 
-  // let chaiHttpResponse: Response;
+// describe('Seu teste', () => {
+//   /**
+//    * Exemplo do uso de stubs com tipos
+//    */
 
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
+//   // let chaiHttpResponse: Response;
 
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
+//   // before(async () => {
+//   //   sinon
+//   //     .stub(Example, "findOne")
+//   //     .resolves({
+//   //       ...<Seu mock>
+//   //     } as Example);
+//   // });
 
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
+//   // after(()=>{
+//   //   (Example.findOne as sinon.SinonStub).restore();
+//   // })
 
-  //   expect(...)
-  // });
-  describe("GET /teams", () => {
-    it("Retorna status 200 e um array de teams", async function () {
-      const httpResponse = await chai.request(app).get("/teams");
+//   // it('...', async () => {
+//   //   chaiHttpResponse = await chai
+//   //      .request(app)
+//   //      ...
 
-      expect(httpResponse.status).to.be.equal(200);
-      expect(httpResponse.body).to.be.an("array");
-    });
-  });
+//   //   expect(...)
+//   // });
 
-  describe("GET /teams/:id", () => {
-    it("Retorna status 200 e um objeto team", async function () {
-      const httpResponse = await chai.request(app).get("/teams/1");
-
-      expect(httpResponse.status).to.be.equal(200);
-      expect(httpResponse.body).to.be.an("object");
-    });
-  });
-});
+//   it('Seu sub-teste', () => {
+//     expect(false).to.be.eq(true);
+//   });
+// });

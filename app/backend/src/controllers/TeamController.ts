@@ -7,9 +7,9 @@ export default class TeamController {
     private teamService = new TeamService(),
   ) {}
 
-  public async getAllTeams(req: Request, res: Response) {
+  public async getAllTeams(_req: Request, res: Response) {
     const serviceResponse = await this.teamService.getAllTeams();
-    res.status(201).json(serviceResponse.data);
+    res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 
   public async getTeamById(req: Request, res: Response) {

@@ -1,9 +1,5 @@
-import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from 'sequelize';
-
-const sequelize = new Sequelize('database', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
+import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import db from '.';
 
 class SequelizeTeam extends Model<InferAttributes<SequelizeTeam>,
 InferCreationAttributes<SequelizeTeam>> {
@@ -23,9 +19,11 @@ SequelizeTeam.init({
     allowNull: false,
   },
 }, {
-  sequelize,
-  modelName: 'teams',
+  sequelize: db,
+  tableName: 'teams',
+  modelName: 'Team',
   timestamps: false,
+  underscored: true,
 });
 
 export default SequelizeTeam;

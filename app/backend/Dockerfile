@@ -11,10 +11,11 @@ COPY package*.json ./
 RUN npm install
 
 # Copiar o restante dos arquivos da aplicação para o container
-COPY . /app-backend
+COPY . .
 
 # Sinalize que aplicação expõe a porta 3001
 EXPOSE 3001
 
 # Configurar os comandos para iniciar a aplicação de acordo com as boas práticas
-CMD ["npm", "start"]
+ENTRYPOINT [ "npm", "run" ]
+CMD ["dev"]
