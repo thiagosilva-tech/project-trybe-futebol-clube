@@ -1,4 +1,6 @@
-import { ICRUDModel } from '../ICRUDModel';
 import { IUser } from './IUser';
 
-export type IUserModel = ICRUDModel<IUser>;
+export interface IUserModel{
+  findByEmail(email: IUser['email']): Promise<IUser | null>,
+  findById(id: IUser['id']): Promise<IUser | null>
+}
