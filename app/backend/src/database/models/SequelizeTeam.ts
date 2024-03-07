@@ -1,4 +1,9 @@
-import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+} from 'sequelize';
 import db from '.';
 
 class SequelizeTeam extends Model<InferAttributes<SequelizeTeam>,

@@ -1,6 +1,4 @@
+import { ICRUDModel } from '../ICRUDModel';
 import { ITeam } from './ITeam';
 
-export interface ITeamModel {
-  findAll(): Promise<ITeam[]>;
-  findById(id: ITeam['id']): Promise<ITeam | null>;
-}
+export type ITeamModel = ICRUDModel<ITeam>;
