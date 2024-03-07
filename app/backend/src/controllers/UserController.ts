@@ -9,13 +9,12 @@ export default class LoginController {
 
   public async login(req: Request, res: Response) {
     const serviceResponse = await this.userService.login(req.body);
-
     res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 
   public async getRole(_req: Request, res: Response) {
-    const { id } = res.locals.payload;
-    const serviceResponse = await this.userService.getUserRole(Number(id));
+    const { email } = res.locals.token;
+    const serviceResponse = await this.userService.getUserRole(email);
 
     res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }

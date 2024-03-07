@@ -5,6 +5,7 @@ import { IUserModel } from '../Interfaces/users/IUserModel';
 import { ServiceMessage, ServiceResponse } from '../Interfaces/ServiceResponse';
 import JWT from '../utils/JWT';
 import { IToken } from '../Interfaces/IToken';
+import { IRole } from '../Interfaces/IRolen';
 
 export default class UserService {
   constructor(
@@ -25,12 +26,15 @@ export default class UserService {
     return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
   }
 
-  public async getUserRole(id: number): Promise<ServiceResponse<ServiceMessage>> {
-    const user = await this.userModel.findById(id);
+  public async getUserRole(email: string): Promise<ServiceResponse<ServiceMessage | IRole>> {
+    console.log(email);
+
+    const user = await this.userModel.findByEmail(email);
     if (!user) {
-      return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+      return { status: 'UNAUTHORIZED', data: { message: 'User not found' } };
     }
 
-    return { status: 'SUCCESSFUL', data: { message: user.role } };
+    const { role } = user;
+    return { status: 'SUCCESSFUL', data: { role } };
   }
 }
