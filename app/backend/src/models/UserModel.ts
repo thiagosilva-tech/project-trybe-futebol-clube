@@ -8,7 +8,7 @@ export default class UserModel implements IUserModel {
   async findByEmail(email: IUser['email']): Promise<IUser | null> {
     const user = await this.model.findOne({ where: { email } });
     if (!user) return null;
-    const { id, password, username, role } = user.dataValues;
+    const { id, password, username, role } = user;
     return { id, email, password, username, role };
   }
 
@@ -16,7 +16,7 @@ export default class UserModel implements IUserModel {
     const user = await this.model.findByPk(id);
     if (!user) return null;
 
-    const { email, password, username, role } = user.dataValues;
+    const { email, password, username, role } = user;
     return { id, email, password, username, role };
   }
 }

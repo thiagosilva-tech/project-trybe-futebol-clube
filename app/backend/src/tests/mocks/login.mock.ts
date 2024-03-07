@@ -28,7 +28,7 @@ const user = {
   ];
   
   const validLoginBody = { email: 'admin@admin.com', password: 'secret_admin' };
-  const invalidPasswordLoginBody = { email: 'thiagosilva@email.com', password: 'Thiago' };
+  const invalidPasswordLoginBody = { email: 'thiagosilva@email.com', password: 'Thiag' };
   const invalidEmailLoginBody = { email: 'invalid_email', password: 'ThiagoSilva' };
   const userRegistered = { ...user, password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW' };
   
