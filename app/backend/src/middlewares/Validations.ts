@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import validatorLogin from '../utils/validatorLogin';
 import JWT from '../utils/JWT';
 
 class Validations {
@@ -7,8 +8,7 @@ class Validations {
     if (!email || !password) {
       return res.status(400).json({ message: 'All fields must be filled' });
     }
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    if (!emailRegex.test(email) || password.length < 6) {
+    if (!validatorLogin.validatorEmail(email) || !validatorLogin.validatorPassword(password)) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     next();

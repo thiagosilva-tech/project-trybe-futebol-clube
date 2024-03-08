@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import UserModel from '../models/UserModel';
 import { ILogin, IUser } from '../Interfaces/users/IUser';
 import { IUserModel } from '../Interfaces/users/IUserModel';
@@ -27,8 +27,6 @@ export default class UserService {
   }
 
   public async getUserRole(email: string): Promise<ServiceResponse<ServiceMessage | IRole>> {
-    console.log(email);
-
     const user = await this.userModel.findByEmail(email);
     if (!user) {
       return { status: 'UNAUTHORIZED', data: { message: 'User not found' } };
