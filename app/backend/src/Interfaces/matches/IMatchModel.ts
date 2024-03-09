@@ -1,3 +1,3 @@
 import { IMatch } from './IMatch';
 
-export type IMatchModel = { findAll(): Promise<IMatch[]> };
+export type IMatchModel = { findAll(inProgress: string | undefined): Promise<IMatch[]> };

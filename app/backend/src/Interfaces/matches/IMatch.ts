@@ -6,4 +6,10 @@ export interface IMatch extends Identifiable {
   awayTeamId: number;
   awayTeamGoals: number;
   inProgress: boolean;
+  homeTeam?: {
+    teamName: string | undefined,
+  },
+  awayTeam?: {
+    teamName: string | undefined,
+  },
 }
