@@ -1,3 +1,4 @@
+import { ServiceMessage } from '../Interfaces/ServiceResponse';
 import formatMatch from '../utils/formatMatch';
 import IncludesMatches from '../services/IncludesMatches';
 import SequelizeMatch from '../database/models/SequelizeMatch';
@@ -14,15 +15,13 @@ export default class MatchModel implements IMatchModel {
     }
     const matches = await this.model.findAll({ where: whereClause, include: IncludesMatches });
     return matches.map((match) => formatMatch(match));
-  //   let matches;
-  //   if (inProgress && inProgress === 'true') {
-  //     matches = await this.model.findAll({ where: { inProgress: true }, include: IncludesMatches });
-  //   } else if (inProgress && inProgress === 'false') {
-  //     matches = await this.model
-  //       .findAll({ where: { inProgress: false }, include: IncludesMatches });
-  //   } else {
-  //     matches = await this.model.findAll({ include: IncludesMatches });
-  //   }
-  //   return matches.map((match) => formatMatch(match));
+  }
+
+  async finishMatch(idMatch: number): Promise<ServiceMessage> {
+    const matchUpdated = await this.model.update({ inProgress: false }, { where: { id: idMatch } });
+    if (matchUpdated[0] === 1) {
+      return { message: 'Finished' };
+    }
+    return { message: 'ERROR' };
   }
 }
