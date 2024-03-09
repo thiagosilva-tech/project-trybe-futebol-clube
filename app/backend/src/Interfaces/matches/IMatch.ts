@@ -1,6 +1,6 @@
 import { Identifiable } from '..';
 
-export interface IMatche extends Identifiable {
+export interface IMatch extends Identifiable {
   homeTeamId: number;
   homeTeamGoals: number;
   awayTeamId: number;

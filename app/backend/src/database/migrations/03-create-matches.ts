@@ -1,9 +1,9 @@
 import { Model, QueryInterface, DataTypes } from 'sequelize';
-import { IMatche } from '../../Interfaces/matches/IMatch';
+import { IMatch } from '../../Interfaces/matches/IMatch';
 
 export default {
     up(queryInterface: QueryInterface){
-        return queryInterface.createTable<Model<IMatche>>('matches', {
+        return queryInterface.createTable<Model<IMatch>>('matches', {
             id:{
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -13,10 +13,6 @@ export default {
             homeTeamId:{
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                references: {
-                    model: 'teams',
-                    key: 'id'
-                },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
                 field: 'home_team_id'
@@ -29,10 +25,6 @@ export default {
             awayTeamId:{
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                references: {
-                    model: 'teams',
-                    key: 'id'
-                },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
                 field: 'away_team_id'
