@@ -21,4 +21,13 @@ export default class MatchService {
     }
     return { status: 'SUCCESSFUL', data: match };
   }
+
+  public async updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number):
+  Promise<ServiceResponse<ServiceMessage>> {
+    const match = await this.matchModel.updateMatch(id, homeTeamGoals, awayTeamGoals);
+    if (match.message === 'ERROR') {
+      return { status: 'NOT_FOUND', data: { message: 'Match Not Found.' } };
+    }
+    return { status: 'SUCCESSFUL', data: match };
+  }
 }

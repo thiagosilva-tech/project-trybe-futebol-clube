@@ -45,6 +45,25 @@ class Validations {
 
     next();
   }
+
+  static validateFieldsMatchUpdate(req: Request, res: Response, next: NextFunction):
+  Response | void {
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    if (!homeTeamGoals || !awayTeamGoals) {
+      return res.status(400).json({ message: 'homeTeamGoals and awayTeamGoals are required' });
+    }
+    next();
+  }
+
+  static validateFieldsMatches(req: Request, res: Response, next: NextFunction):
+  Response | void {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
+    if (!homeTeamId || !awayTeamId || !homeTeamGoals || !awayTeamGoals) {
+      return res.status(400)
+        .json({ message: 'homeTeamId, awayTeamId, homeTeamGoals and awayTeamGoals are required' });
+    }
+    next();
+  }
 }
 
 export default Validations;

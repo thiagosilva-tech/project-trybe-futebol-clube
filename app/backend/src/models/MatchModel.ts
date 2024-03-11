@@ -24,4 +24,14 @@ export default class MatchModel implements IMatchModel {
     }
     return { message: 'ERROR' };
   }
+
+  async updateMatch(idMatch: number, homeTeamGoals: number, awayTeamGoals: number):
+  Promise<ServiceMessage> {
+    const matchUpdated = await this.model
+      .update({ homeTeamGoals, awayTeamGoals }, { where: { id: idMatch } });
+    if (matchUpdated[0] === 1) {
+      return { message: 'Updated' };
+    }
+    return { message: 'ERROR' };
+  }
 }
