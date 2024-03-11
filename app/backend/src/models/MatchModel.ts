@@ -34,4 +34,18 @@ export default class MatchModel implements IMatchModel {
     }
     return { message: 'ERROR' };
   }
+
+  async createMatch(match: IMatch): Promise<IMatch | ServiceMessage> {
+    const { homeTeamId, awayTeamId } = match;
+    const createMatchObj = { ...match, inProgress: true };
+    if (homeTeamId === awayTeamId) {
+      return { message: 'It is not possible to create a match with two equal teams' };
+    }
+    const findTeams = await this.model.findAll({ where: { id: [homeTeamId, awayTeamId] } });
+    if (findTeams.length !== 2) {
+      return { message: 'There is no team with such id!' };
+    }
+    const newMatch = await this.model.create(createMatchObj);
+    return newMatch;
+  }
 }

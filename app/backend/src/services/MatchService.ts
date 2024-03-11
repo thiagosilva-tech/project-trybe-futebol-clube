@@ -1,3 +1,4 @@
+import { IMatchCreate } from '../Interfaces/matches/IMatchCreate';
 import MatchModel from '../models/MatchModel';
 import { IMatch } from '../Interfaces/matches/IMatch';
 import { IMatchModel } from '../Interfaces/matches/IMatchModel';
@@ -29,5 +30,19 @@ export default class MatchService {
       return { status: 'NOT_FOUND', data: { message: 'Match Not Found.' } };
     }
     return { status: 'SUCCESSFUL', data: match };
+  }
+
+  public async createMatch(match: IMatchCreate): Promise<ServiceResponse<IMatch | ServiceMessage>> {
+    const result = await this.matchModel.createMatch(match);
+
+    if ('message' in result && result.message === 'There is no team with such id!') {
+      return { status: 'NOT_FOUND', data: result };
+    }
+
+    if ('message' in result && result.message
+    === 'It is not possible to create a match with two equal teams') {
+      return { status: 'UNPROCESSABLE_ENTITY', data: result };
+    }
+    return { status: 'CREATED', data: result };
   }
 }

@@ -18,6 +18,11 @@ matchRouter
     Validations.validateToken,
     Validations.validateFieldsMatchUpdate,
     (req: Request, res: Response) => matchController.updateMatch(req, res),
+  ).post(
+    '/',
+    Validations.validateToken,
+    Validations.validateFieldsMatches,
+    (req: Request, res: Response) => matchController.createMatch(req, res),
   );
 
 export default matchRouter;
