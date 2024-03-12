@@ -13,6 +13,10 @@ leaderboardRouter
   .get(
     '/away',
     (req: Request, res: Response) => leaderboardController.getLeaderboardAway(req, res),
+  )
+  .get(
+    '/',
+    (req: Request, res: Response) => leaderboardController.getLeaderboard(req, res),
   );
 
 export default leaderboardRouter;
