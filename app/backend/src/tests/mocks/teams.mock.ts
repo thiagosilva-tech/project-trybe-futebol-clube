@@ -18,4 +18,5 @@ const teamsMock = [
     "teamName": "Avaí/Kindermann"
   }
 
+
   export { teamsMock, teamMock };
