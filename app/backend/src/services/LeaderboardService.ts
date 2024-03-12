@@ -12,4 +12,9 @@ export default class LeaderboardService {
     const leaderboard = await this.leaderboardModel.getLeaderboardHome();
     return { status: 'SUCCESSFUL', data: leaderboard };
   }
+
+  public async getLeaderboardAway(): Promise<ServiceResponse<ILeaderboard[] | undefined>> {
+    const leaderboard = await this.leaderboardModel.getLeaderboardAway();
+    return { status: 'SUCCESSFUL', data: leaderboard };
+  }
 }

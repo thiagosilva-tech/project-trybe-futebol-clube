@@ -1,3 +1,4 @@
+import LeaderboardAway from '../utils/LeaderboardAway';
 import sortLeaderboard from '../utils/sortLeaderboard';
 import IncludesMatches from '../services/IncludesMatches';
 import ILeaderboard from '../Interfaces/leaderboard/ILeaderboard';
@@ -19,6 +20,20 @@ export default class LeaderboardModel implements ILeaderboardModel {
       });
     const leaderboard = teams.map((team) => {
       const leaderboardClass = new LeaderboardHome(team, matches);
+      return leaderboardClass.getLeaderboard();
+    });
+    return sortLeaderboard(leaderboard);
+  }
+
+  public async getLeaderboardAway(): Promise<ILeaderboard[]> {
+    const teams = await this.modelTeam.findAll();
+    const matches = await this.modelMatches
+      .findAll({
+        where: { inProgress: false },
+        include: IncludesMatches,
+      });
+    const leaderboard = teams.map((team) => {
+      const leaderboardClass = new LeaderboardAway(team, matches);
       return leaderboardClass.getLeaderboard();
     });
     return sortLeaderboard(leaderboard);
