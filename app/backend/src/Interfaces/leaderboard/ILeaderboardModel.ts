@@ -1,5 +1,5 @@
-import { ILeaderboard } from './ILeaderboard';
+import ILeaderboard from './ILeaderboard';
 
 export type ILeaderboardModel = {
-  getLeaderboard(): Promise<ILeaderboard[] | undefined>
+  getLeaderboardHome(): Promise<ILeaderboard[] | undefined>
 };
