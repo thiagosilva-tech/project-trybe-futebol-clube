@@ -1,3 +1,4 @@
+import sortLeaderboard from '../utils/sortLeaderboard';
 import IncludesMatches from '../services/IncludesMatches';
 import ILeaderboard from '../Interfaces/leaderboard/ILeaderboard';
 import SequelizeMatch from '../database/models/SequelizeMatch';
@@ -16,14 +17,10 @@ export default class LeaderboardModel implements ILeaderboardModel {
         where: { inProgress: false },
         include: IncludesMatches,
       });
-
     const leaderboard = teams.map((team) => {
       const leaderboardClass = new LeaderboardHome(team, matches);
       return leaderboardClass.getLeaderboard();
     });
-
-    leaderboard.sort((a, b) => b.totalPoints - a.totalPoints);
-
-    return leaderboard;
+    return sortLeaderboard(leaderboard);
   }
 }
