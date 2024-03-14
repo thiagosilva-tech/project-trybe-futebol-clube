@@ -1,3 +1,4 @@
+import SequelizeTeam from '../database/models/SequelizeTeam';
 import { ServiceMessage } from '../Interfaces/ServiceResponse';
 import formatMatch from '../utils/formatMatch';
 import IncludesMatches from '../services/IncludesMatches';
@@ -6,19 +7,21 @@ import { IMatchModel } from '../Interfaces/matches/IMatchModel';
 import { IMatch } from '../Interfaces/matches/IMatch';
 
 export default class MatchModel implements IMatchModel {
-  private model = SequelizeMatch;
+  private modelMatch = SequelizeMatch;
+  private modelTeam = SequelizeTeam;
 
   async findAll(inProgress: string | undefined): Promise<IMatch[]> {
     let whereClause = {};
     if (inProgress) {
       whereClause = { inProgress: inProgress === 'true' };
     }
-    const matches = await this.model.findAll({ where: whereClause, include: IncludesMatches });
+    const matches = await this.modelMatch.findAll({ where: whereClause, include: IncludesMatches });
     return matches.map((match) => formatMatch(match));
   }
 
   async finishMatch(idMatch: number): Promise<ServiceMessage> {
-    const matchUpdated = await this.model.update({ inProgress: false }, { where: { id: idMatch } });
+    const matchUpdated = await this.modelMatch
+      .update({ inProgress: false }, { where: { id: idMatch } });
     if (matchUpdated[0] === 1) {
       return { message: 'Finished' };
     }
@@ -27,7 +30,7 @@ export default class MatchModel implements IMatchModel {
 
   async updateMatch(idMatch: number, homeTeamGoals: number, awayTeamGoals: number):
   Promise<ServiceMessage> {
-    const matchUpdated = await this.model
+    const matchUpdated = await this.modelMatch
       .update({ homeTeamGoals, awayTeamGoals }, { where: { id: idMatch } });
     if (matchUpdated[0] === 1) {
       return { message: 'Updated' };
@@ -41,11 +44,11 @@ export default class MatchModel implements IMatchModel {
     if (homeTeamId === awayTeamId) {
       return { message: 'It is not possible to create a match with two equal teams' };
     }
-    const findTeams = await this.model.findAll({ where: { id: [homeTeamId, awayTeamId] } });
+    const findTeams = await this.modelTeam.findAll({ where: { id: [homeTeamId, awayTeamId] } });
     if (findTeams.length !== 2) {
       return { message: 'There is no team with such id!' };
     }
-    const newMatch = await this.model.create(createMatchObj);
+    const newMatch = await this.modelMatch.create(createMatchObj);
     return newMatch;
   }
 }

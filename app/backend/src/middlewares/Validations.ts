@@ -3,30 +3,37 @@ import validatorLogin from '../utils/validatorLogin';
 import JWT from '../utils/JWT';
 
 class Validations {
-  static validateLogin(req: Request, res: Response, next: NextFunction): Response | void {
+  static validateLogin(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Response | void {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ message: 'All fields must be filled' });
     }
-    if (!validatorLogin.validatorEmail(email) || !validatorLogin.validatorPassword(password)) {
+    if (
+      !validatorLogin.validatorEmail(email)
+      || !validatorLogin.validatorPassword(password)
+    ) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     next();
   }
 
-  static async validateToken(req: Request, res: Response, next: NextFunction):
-  Promise<Response | void> {
+  static async validateToken(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
     const authHeader = req.headers.authorization;
-    if (!authHeader) {
-      return res.status(401).json({ message: 'Token not found' });
-    }
+    if (!authHeader) return res.status(401).json({ message: 'Token not found' });
     let token;
     if (authHeader.includes(' ')) {
       token = authHeader.split(' ').slice(1).join(' ');
     } else {
       token = authHeader;
     }
-
     const validToken = JWT.verify(token);
     if (validToken === 'Token must be a valid token') {
       return res.status(401).json({ message: validToken });
@@ -35,7 +42,11 @@ class Validations {
     next();
   }
 
-  static validateUser(req: Request, res: Response, next: NextFunction): Response | void {
+  static validateUser(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Response | void {
     const user = req.body;
     const requiredKeys = ['email', 'password'];
     const notFoundKey = requiredKeys.find((key) => !(key in user));
@@ -46,19 +57,30 @@ class Validations {
     next();
   }
 
-  static validateFieldsMatchUpdate(req: Request, res: Response, next: NextFunction):
-  Response | void {
+  static validateFieldsMatchUpdate(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Response | void {
     const { homeTeamGoals, awayTeamGoals } = req.body;
     if (!homeTeamGoals || !awayTeamGoals) {
-      return res.status(400).json({ message: 'homeTeamGoals and awayTeamGoals are required' });
+      return res
+        .status(400)
+        .json({ message: 'homeTeamGoals and awayTeamGoals are required' });
     }
     next();
   }
 
-  static validateFieldsMatches(req: Request, res: Response, next: NextFunction):
-  Response | void {
+  static validateFieldsMatches(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Response | void {
     const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
-    if (!homeTeamId || !awayTeamId || !homeTeamGoals || !awayTeamGoals) {
+
+    if (!homeTeamId || !awayTeamId
+      || homeTeamGoals === undefined || homeTeamGoals < 0
+      || awayTeamGoals === undefined || awayTeamGoals < 0) {
       return res.status(400)
         .json({ message: 'homeTeamId, awayTeamId, homeTeamGoals and awayTeamGoals are required' });
     }

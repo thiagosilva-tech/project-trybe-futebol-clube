@@ -34,7 +34,8 @@ export default class MatchController {
         homeTeamId: Number(homeTeamId),
         awayTeamId: Number(awayTeamId),
         homeTeamGoals,
-        awayTeamGoals });
+        awayTeamGoals,
+      });
     res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 }
