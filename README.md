@@ -77,14 +77,14 @@ Implemente uma rota GET retornando um array JSON de equipes.
 
 #### Migration e Model da Tabela de Partidas:
 
-    Desenvolva a Migration e o Model para a tabela de partidas em /app/backend/src/database. 
-    Garanta que a tabela contenha os dados iniciais corretos.
+Desenvolva a Migration e o Model para a tabela de partidas em /app/backend/src/database. 
+Garanta que a tabela contenha os dados iniciais corretos.
 
 #### Testes de Integração para Partidas:
 
-    Desenvolva testes de integração cobrindo pelo menos 45% dos arquivos em `/app/backend/src`. 
-    Garanta um mínimo de 70 linhas cobertas. 
-    Concentre-se em testar o contrato do endpoint `/matches`. 
+Desenvolva testes de integração cobrindo pelo menos 45% dos arquivos em `/app/backend/src`. 
+Garanta um mínimo de 70 linhas cobertas. 
+Concentre-se em testar o contrato do endpoint `/matches`. 
 
 - Endpoint de Partidas:
     Desenvolva o endpoint `/matches` no backend para retornar corretamente os dados das partidas. 
@@ -120,9 +120,9 @@ Implemente uma rota GET retornando um array JSON de equipes.
 #### Bonus: 
 #### Teste Abrangente:
 
-    Desenvolva testes extensivos cobrindo pelo menos 80% dos arquivos em `/app/backend/src`. 
-    Garanta um mínimo de 100 linhas cobertas. 
-    Concentre-se no endpoint `/leaderboard`. 
+Desenvolva testes extensivos cobrindo pelo menos 80% dos arquivos em `/app/backend/src`. 
+Garanta um mínimo de 100 linhas cobertas. 
+Concentre-se no endpoint `/leaderboard`. 
 
 - Endpoint do Leaderboard Home:
     Desenvolva o endpoint `/leaderboard/home` para retornar dados de desempenho da equipe de casa. 
@@ -150,8 +150,8 @@ Implemente uma rota GET retornando um array JSON de equipes.
 
 #### Endpoint do Leaderboard Geral:
 
-    Desenvolva o endpoint `/leaderboard` para retornar dados de desempenho geral da equipe. 
-    Implemente uma rota GET retornando dados relevantes. 
+Desenvolva o endpoint `/leaderboard` para retornar dados de desempenho geral da equipe. 
+Implemente uma rota GET retornando dados relevantes. 
 
 #### Bônus: 
 
